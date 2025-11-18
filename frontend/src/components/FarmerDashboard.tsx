@@ -11,6 +11,7 @@ interface FarmerDashboardProps {
 export function FarmerDashboard({ onNavigate, user, onLogout }: FarmerDashboardProps) {
   const [activeTab, setActiveTab] = useState('products');
   const [products, setProducts] = useState<any[]>([]);
+  const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
   const [messages, setMessages] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
   const [showAddForm, setShowAddForm] = useState(false);
@@ -32,7 +33,7 @@ export function FarmerDashboard({ onNavigate, user, onLogout }: FarmerDashboardP
   const fetchProducts = async () => {
     const token = localStorage.getItem('agrismart_token');
     try {
-      const response = await fetch('http://localhost:5000/api/products/my-products', {
+      const response = await fetch(`${API_URL}/api/products/my-products`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -51,7 +52,7 @@ export function FarmerDashboard({ onNavigate, user, onLogout }: FarmerDashboardP
   const fetchMessages = async () => {
     const token = localStorage.getItem('agrismart_token');
     try {
-      const response = await fetch('http://localhost:5000/api/messages/farmer', {
+      const response = await fetch(`${API_URL}/api/messages/farmer`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -73,7 +74,7 @@ export function FarmerDashboard({ onNavigate, user, onLogout }: FarmerDashboardP
     const token = localStorage.getItem('agrismart_token');
 
     try {
-      const response = await fetch('http://localhost:5000/api/products', {
+      const response = await fetch(`${API_URL}/api/products`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -130,7 +131,7 @@ export function FarmerDashboard({ onNavigate, user, onLogout }: FarmerDashboardP
 
     const token = localStorage.getItem('agrismart_token');
     try {
-      const response = await fetch(`http://localhost:5000/api/products/${productId}`, {
+      const response = await fetch(`${API_URL}/api/products/${productId}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${token}`

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { UserCircle, Tractor, ShoppingBag, MapPin, Phone, Loader2 } from 'lucide-react';
 import { useUser } from '@clerk/clerk-react';
 
+
 interface RoleSelectionProps {
   onComplete: () => void;
 }
@@ -13,6 +14,8 @@ export function RoleSelection({ onComplete }: RoleSelectionProps) {
   const [location, setLocation] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
+
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -27,7 +30,7 @@ export function RoleSelection({ onComplete }: RoleSelectionProps) {
 
     try {
       // Sync user data to MongoDB
-      const response = await fetch('http://localhost:5000/api/auth/clerk-sync', {
+      const response = await fetch(`${API_URL}/api/auth/clerk-sync`, {
         method: 'POST',
         headers: { 
           'Content-Type': 'application/json',

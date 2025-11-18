@@ -29,6 +29,7 @@ function ClerkAppContent() {
   const [showDemoBanner, setShowDemoBanner] = useState(false);
   const [needsRoleSelection, setNeedsRoleSelection] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 
   // Check if user needs role selection
   useEffect(() => {
@@ -63,7 +64,7 @@ function ClerkAppContent() {
         } else {
           // Fetch user data from backend
           try {
-            const response = await fetch(`http://localhost:5000/api/auth/clerk-user/${user.id}`);
+            const response = await fetch(`${API_URL}/api/auth/clerk-user/${user.id}`);
             if (response.ok) {
               const data = await response.json();
               localStorage.setItem('agrismart_user', JSON.stringify(data.user));
@@ -72,7 +73,7 @@ function ClerkAppContent() {
               // Generate token for existing user if not present
               if (!localStorage.getItem('agrismart_token')) {
                 // Re-sync to get token
-                const syncResponse = await fetch('http://localhost:5000/api/auth/clerk-sync', {
+                const syncResponse = await fetch(`${API_URL}//api/auth/clerk-sync`, {
                   method: 'POST',
                   headers: { 'Content-Type': 'application/json' },
                   body: JSON.stringify({
