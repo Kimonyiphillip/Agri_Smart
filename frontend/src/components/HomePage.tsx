@@ -19,7 +19,7 @@ export function HomePage({ onNavigate }: HomePageProps) {
             <h1 className="text-white">
               Empowering Farmers, Connecting Markets
             </h1>
-            <p className="text-white/90">
+            <p className="text-blue/90">
               Join the digital revolution in agriculture. Connect directly with farmers,
               get fresh produce, and support sustainable farming practices.
             </p>
