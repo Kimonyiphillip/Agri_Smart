@@ -13,8 +13,9 @@ export function BuyerDashboard({ onNavigate, onLogout }: BuyerDashboardProps) {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [loading, setLoading] = useState(false);
-
+  
   const categories = ['All', 'Vegetables', 'Fruits', 'Dairy', 'Cereals'];
+  const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
 
   useEffect(() => {
     fetchProducts();
@@ -27,7 +28,7 @@ export function BuyerDashboard({ onNavigate, onLogout }: BuyerDashboardProps) {
   const fetchProducts = async () => {
     setLoading(true);
     try {
-      const response = await fetch('http://localhost:5000/api/products');
+      const response = await fetch(`${API_URL}/api/products`);
       const data = await response.json();
       if (response.ok) {
         setProducts(data);
@@ -67,12 +68,12 @@ export function BuyerDashboard({ onNavigate, onLogout }: BuyerDashboardProps) {
     
     // Check if user is logged in
     if (!token) {
-      alert('Please login as a buyer to contact farmers. Try demo credentials: buyer@demo.com / demo123');
+      alert('Please login as a buyer to contact farmers');
       return;
     }
 
     try {
-      const response = await fetch('http://localhost:5000/api/messages', {
+      const response = await fetch(`${API_URL}/api/messages`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -92,7 +93,7 @@ export function BuyerDashboard({ onNavigate, onLogout }: BuyerDashboardProps) {
       }
     } catch (error) {
       // Demo mode - backend not available
-      alert('Demo Mode: Message would be sent to ' + product.farmer?.name + '. Connect your backend to enable real messaging.');
+      alert('server connection problem ' + product.farmer?.name + '. try again or contact admin.');
     }
   };
 

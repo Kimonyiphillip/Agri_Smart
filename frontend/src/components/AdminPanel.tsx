@@ -11,6 +11,7 @@ export function AdminPanel({ onNavigate, onLogout }: AdminPanelProps) {
   const [users, setUsers] = useState<any[]>([]);
   const [products, setProducts] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
+  const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
 
   useEffect(() => {
     fetchUsers();
@@ -20,7 +21,7 @@ export function AdminPanel({ onNavigate, onLogout }: AdminPanelProps) {
   const fetchUsers = async () => {
     const token = localStorage.getItem('agrismart_token');
     try {
-      const response = await fetch('http://localhost:5000/api/admin/users', {
+      const response = await fetch(`${API_URL}/api/admin/users`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -39,7 +40,7 @@ export function AdminPanel({ onNavigate, onLogout }: AdminPanelProps) {
   const fetchProducts = async () => {
     const token = localStorage.getItem('agrismart_token');
     try {
-      const response = await fetch('http://localhost:5000/api/admin/products', {
+      const response = await fetch(`${API_URL}/api/admin/products`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -58,7 +59,7 @@ export function AdminPanel({ onNavigate, onLogout }: AdminPanelProps) {
   const handleApproveUser = async (userId: string) => {
     const token = localStorage.getItem('agrismart_token');
     try {
-      const response = await fetch(`http://localhost:5000/api/admin/users/${userId}/approve`, {
+      const response = await fetch(`${API_URL}/api/admin/users/${userId}/approve`, {
         method: 'PATCH',
         headers: {
           'Authorization': `Bearer ${token}`
@@ -81,7 +82,7 @@ export function AdminPanel({ onNavigate, onLogout }: AdminPanelProps) {
 
     const token = localStorage.getItem('agrismart_token');
     try {
-      const response = await fetch(`http://localhost:5000/api/admin/users/${userId}`, {
+      const response = await fetch(`${API_URL}/api/admin/users/${userId}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${token}`
@@ -104,7 +105,7 @@ export function AdminPanel({ onNavigate, onLogout }: AdminPanelProps) {
 
     const token = localStorage.getItem('agrismart_token');
     try {
-      const response = await fetch(`http://localhost:5000/api/admin/products/${productId}`, {
+      const response = await fetch(`${API_URL}/api/admin/products/${productId}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${token}`

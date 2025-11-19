@@ -73,7 +73,7 @@ function ClerkAppContent() {
               // Generate token for existing user if not present
               if (!localStorage.getItem('agrismart_token')) {
                 // Re-sync to get token
-                const syncResponse = await fetch(`${API_URL}//api/auth/clerk-sync`, {
+                const syncResponse = await fetch(`${API_URL}/api/auth/clerk-sync`, {
                   method: 'POST',
                   headers: { 'Content-Type': 'application/json' },
                   body: JSON.stringify({
