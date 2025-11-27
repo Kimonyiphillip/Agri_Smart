@@ -1,4 +1,6 @@
 # 🌱 AgriSmart - Farm Produce Marketplace
+frontend link=https://agri-smart-a8mz.vercel.app
+backend link=https://agri-smart-backend.onrender.com
 
 A modern, eco-friendly farm produce marketplace built with the MERN stack, featuring **Clerk authentication**, role-based access control, and real-time product management.
 
